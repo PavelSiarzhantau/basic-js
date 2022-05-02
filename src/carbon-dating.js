@@ -17,11 +17,27 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(currentActivity) {
+   let regex = /^[0-9]*[.]?[0-9]+$/;
+
+   if (regex.test(currentActivity)) {
+      if (parseFloat(currentActivity) <= 0 
+          || parseFloat(currentActivity) > 15 
+          || typeof currentActivity !== 'string') {
+         return false;
+      } else {
+         let constantForTheReaction = 0.693 / 5730;
+         let timeOld = Math.ceil((Math.log(MODERN_ACTIVITY / parseFloat(currentActivity)) / constantForTheReaction));
+         return timeOld;
+      }
+   } else {
+      return false;
+   }
+
+
 }
 
+
 module.exports = {
-  dateSample
+   dateSample
 };
